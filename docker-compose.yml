@@ -1,0 +1,28 @@
+---
+version: '3'
+services:
+  kommunitas:
+    image: kommunitasorg/kommunitas:stable
+    # image: kommunitasorg/kommunitas:develop
+    # Use plotting image
+    # image: kommunitasorg/kommunitas:develop_plot
+    # Build step - only needed when additional dependencies are needed
+    # build:
+    #   context: .
+    #   dockerfile: "./docker/Dockerfile.custom"
+    restart: unless-stopped
+    container_name: kommunitas
+    volumes:
+      - "./user_data:/kommunitas/user_data"
+    # Expose api on port 8080 (localhost only)
+    # Please read the https://www.kommunitas.io/en/latest/rest-api/ documentation
+    # before enabling this.
+    # ports:
+    #   - "127.0.0.1:8080:8080"
+    # Default command used when running `docker compose up`
+    command: >
+      trade
+      --logfile /kommunitas/user_data/logs/kommunitas.log
+      --db-url sqlite:////kommunitas/user_data/tradesv3.sqlite
+      --config /kommunitas/user_data/config.json
+      --strategy SampleStrategy

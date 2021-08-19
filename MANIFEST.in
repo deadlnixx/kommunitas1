@@ -1,0 +1,6 @@
+include LICENSE
+include README.md
+recursive-include kommunitas *.py
+recursive-include kommunitas/templates/ *.j2 *.ipynb
+include kommunitas/rpc/api_server/ui/fallback_file.html
+include kommunitas/rpc/api_server/ui/favicon.ico
